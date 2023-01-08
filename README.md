@@ -1,53 +1,87 @@
-# Online-Retail-customer-segmentation
-CUSTOMER-SEGMENTATION-UNSUPERVISED-ML-
-Customer-Segmentation
+# Online Retail Customer Segmentation
 
-Problem Description In this project, your task is to identify major customer segments on a transnational data set which contains all the transactions occurring between 01/12/2010 and 09/12/2011 for a UK-based and registered non-store online retail.The company mainly sells unique all-occasion gifts. Many customers of the company are wholesalers.
+### Problem Statement:
 
-Data Description
+In this project, our task is to identify major customer segments on a transactional data set which contains all the transactions occurring between 01/12/2010 and 09/12/2011 for an UK based and registered non-store online retail. The company mainly sells unique all occasion gifts. Many customers of the company are wholesalers.
 
-Attribute Information:
+Customer segmentation is a way to split customers into groups based on certain characteristics that those customers share. Customer segmentation will allow marketers
+to better tailor their marketing efforts to various audience subsets. The dataset contains 541909 records of transactions with 8 features.
 
-InvoiceNo: Invoice number. Nominal, a 6-digit integral number uniquely assigned to each transaction. If this code starts with letter 'c', it indicates a cancellation.
+---
+### Data Description:
 
-StockCode: Product (item) code. Nominal, a 5-digit integral number uniquely assigned to each distinct product.
+The dataset contains 541909 records and 8 features which consists of:
 
-Description: Product (item) name. Nominal.
+● InvoiceNo: Invoice number. Nominal, a 6 digit integral number uniquely assigned to each transaction. If this code starts with letter ‘c’, it indicates a cancellation.
 
-Quantity: The quantities of each product (item) per transaction. Numeric.
+● StockCode: Product code. Nominal, a 5 digit integral number uniquely assigned to each distinct product.
 
-InvoiceDate: Invice Date and time. Numeric, the day and time when each transaction was generated.
+● Description: Product name. Nominal
 
-UnitPrice: Unit price. Numeric, Product price per unit in sterling.
+● Quantity: The quantities of each product per transaction. Numeric.
 
-CustomerID: Customer number. Nominal, a 5-digit integral number uniquely assigned to each customer.
+● InvoiceDate: Invoice date and time. Numeric, the day and time when each transaction was generated.
 
-Country: Country name. Nominal, the name of the country where each customer resides.
+● UnitPrice: Unit Price. Numeric, product price per unit in sterling.
 
-Customer-Segmentation information:
+● CustomerID: Customer number. Nominal, a 5 digit integral number uniquely assigned to each customer.
 
-Also known as market segmentation, customer segmentation is the division of potential customers in a given market into discrete groups. That division is based on customers having similar:
+● Country: Country name. Nominal, the name of the country where each customer resides.
 
-Needs (i.e., so a single whole product can satisfy them) Buying characteristics (i.e., responses to messaging, marketing channels, and sales channels, that a single go-to-market approach can be used to sell to them competitively and economically) There are three main approaches to market segmentation:
+---
+### Data Exploration:
 
-A priori segmentation, the simplest approach, uses a classification scheme based on publicly available characteristics—such as industry and company size—to create distinct groups of customers within a market. However, a priori market segmentation may not always be valid since companies in the same industry and of the same size may have very different needs.
+Let us now summarize the insights generated from EDA:
 
-Needs-based segmentation is based on differentiated, validated drivers (needs) that customers express for a specific product or service being offered. The needs are discovered and verified through primary market research, and segments are demarcated based on those different needs rather than characteristics such as industry or company size.
+● White hanging heart T-light holder was the most sold product and Green with metal bag charm was one of the least sold products.
 
-Value-based segmentation differentiates customers by their economic value, grouping customers with the same value level into individual segments that can be distinctly targeted.
+● UK had the most number of customers which is pretty obvious because it is an UK based online retail company.
 
-What is the business use case of project?
+● Saudi Arabia followed by Bahrain had the least number of customers.
 
-Customer segmentation has a lot of potential benefits. It helps a company to develop an effective strategy for targeting its customers. This has a direct impact on the entire product development cycle, the budget management practices, and the plan for delivering targeted promotional content to customers.
+● There are 4338 unique customers and only 10 customers had an order share of approx 9% which implies that these customers could be wholesalers.
 
-What is the potential impact of project? Customer segmentation can have a great effect on customer management in that, by dividing customers into different groups that share similar needs, the company can market to each group differently and focus on what each kind of customer needs at any given moment.
+● The distribution of all the variables were heavily right skewed and log transformation was applied to bring them close to a normal distribution.
 
-HOW you approached the problem statement? This study started with importing dataset, analyzing dataset after this I have done preprocessing, checked for the null values as our dataset contains many null values in Customer id feature and we have to segment the customers, without customer id we are unable to segment customers therefore removed all the rows without Customer id.
+● Most of the customers had made a purchase on Thursday followed by Wednesday and the least number of purchases was made on Friday.
 
-After that did some exploratory data analysis (EDA) and came to know about top customers, Worst customers, periodical purchasing stats, most revenue generated weekdays, purchase stats of country, top and lease purchasing country, top sold product, most revenue generated product, Customer stats, etc.
+● The most purchases were made during the festive months of October to December and the least number of purchases was made during the initial months of January
+and February.
 
-After that did some feature engineering to build the RFM model (recency, frequency and monetary value) . I have extracted and analyzed RFM scores then created customer segments in 3 categories: bronze, silver and gold.
+● Most of the people had made their purchases during the afternoon period and very less number of purchases during evening.
 
-Then did data preprocessing for clustering with the help of log transformation, reduced Skewness of data, then scaled data. After scaling extracted Silhouette Score Based on the inertia and silhouette score, I got to know that the optimal number of clusters is 3.
+---
+### RFM Segmentation & Analysis:
 
-Then implemented Kmeans clustering and plotted different graphs to visualize clusters
+Recency, frequency and monetary value is a marketing analysis tool used to identify a company’s or an organization’s best customers by measuring and analyzing spending
+habits.
+
+The RFM model is based on three quantitative factors:
+
+    ● Recency: How recently a customer has made a purchase
+
+    ● Frequency: How often a customer makes a purchase
+
+    ● Monetary: How much money a customer spends on purchases
+
+RFM analysis numerically ranks a customer in each of these three categories, generally on a scale of 1 to 5. The best customers would receive a top score in every category. These three RFM factors can be used to reasonably predict how likely or unlikely it is that a customer will do business again with a firm or company. RFM analysis allows a comparison between potential customers or clients. It gives organizations a sense of how much revenue comes from repeat customers vs new customers, and which levers they can pull to try to make customers happier so they become repeat purchasers. Despite the useful information that is acquired through RFM analysis, firms must take into consideration that even the best customers will not want to be over solicited, and the lower ranking customers may be cultivated with additional marketing efforts.
+
+---
+### Clustering Models:
+
+Clustering can be considered the most important unsupervised learning problem, so as every other problem of this kind, it deals with finding a structure in a collection of unlabeled data. A loose definition of clustering could be “the process of organizing objects into groups whose members are similar in some way”. A cluster is therefore a collection of objects which are similar between them and are dissimilar to the objects belonging to other clusters.
+
+In Addition to the K-means clustering model implemented on RFM data, we have implemented K-means separately on Recency, Monetary and Frequency, Monetary data
+along with hierarchical clustering on RFM data to compare the performances of each clustering method.
+We have again used the silhouette score method and the elbow method for determining the best ‘K’ value for K-means clustering and a dendrogram for hierarchical clustering. A dendrogram is a diagram that shows the hierarchical relationship between objects. It is most commonly created as an output from hierarchical clustering. The main use of a dendrogram is to work out the best way to allocate objects to clusters.
+
+Model Name | Data | Optimal Number of Clusters
+---------- | ---- | --------------------------
+K-Means | RM | 4
+K-Means | FM | 3
+K-Means | RFM | 3
+Hierarchical | RFM | 2
+
+We can observe from the different clustering methods that the optimal number of clusters for each method is around 2 or 3. Thus, we can consider 3 as the optimal number of clusters in our final model of K-means on RFM data and identify the different customer segments.
+
+***
